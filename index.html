@@ -1,599 +1,1646 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ética em Provas · Método Orlando Abreu</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js 3 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
-            color: #1a2634;
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 48px 48px 32px 32px;
-            box-shadow: 0 20px 40px -10px rgba(0,20,40,0.12);
-            padding: 2.2rem 2rem;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-
-        /* cabeçalho moderno */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .badge {
-            background: #0f2b3c;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            display: inline-block;
-            margin-bottom: 0.8rem;
-            border: 1px solid #3984b8;
-        }
-
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.01em;
-            background: linear-gradient(145deg, #0b2d3b, #164c5e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.3rem;
-        }
-
-        .sub {
-            font-size: 1.2rem;
-            color: #2c4e63;
-            font-weight: 400;
-            border-left: 5px solid #2d7f9e;
-            padding-left: 1.2rem;
-            margin-top: 0.2rem;
-        }
-
-        /* gráfico e rodapé explicativo */
-        .chart-section {
-            background: white;
-            border-radius: 32px;
-            padding: 2rem 1.8rem;
-            margin: 2rem 0 2.5rem;
-            box-shadow: 0 8px 20px -8px rgba(0,32,64,0.08);
-            border: 1px solid #e2edf2;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .chart-box {
-            flex: 1 1 260px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .chart-footnote {
-            flex: 2 1 300px;
-        }
-
-        .footnote-card {
-            background: #f0f6fa;
-            padding: 1.8rem;
-            border-radius: 24px;
-            border-left: 8px solid #2f7c99;
-        }
-
-        .footnote-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #0e4b5e;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .highlight-list {
-            list-style: none;
-        }
-
-        .highlight-list li {
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-            display: flex;
-            gap: 10px;
-            align-items: baseline;
-        }
-
-        .highlight-list i {
-            color: #1d7e9c;
-            width: 20px;
-            text-align: center;
-        }
-
-        .porcentagem-span {
-            background: #113946;
-            color: white;
-            border-radius: 40px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-
-        /* destrinchando código de ética – subtemas Orlando Abreu */
-        .doutrina {
-            background: linear-gradient(105deg, #ffffff 0%, #fafdff 100%);
-            border-radius: 28px;
-            padding: 2rem 2rem 1.8rem;
-            margin: 2.5rem 0;
-            border: 1px solid #d9e7f0;
-            box-shadow: 0 8px 0 #b1cbd6;
-        }
-
-        .doutrina h2 {
-            font-size: 1.9rem;
-            font-weight: 650;
-            color: #0a3442;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 2px dashed #87b9c9;
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .autor-tag {
-            background: #adc9d3;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #0a2e3a;
-        }
-
-        .grid-subtemas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .subitem {
-            background: #eaf1f5;
-            padding: 1.3rem;
-            border-radius: 18px;
-            transition: all 0.2s;
-        }
-
-        .subitem i {
-            color: #206d82;
-            font-size: 1.4rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .subitem strong {
-            font-size: 1.2rem;
-            color: #0b4a58;
-        }
-
-        /* questões interativas */
-        .questoes-section {
-            margin-top: 2.8rem;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title h2 {
-            font-size: 1.9rem;
-            font-weight: 650;
-            color: #103c49;
-        }
-
-        .questao-card {
-            background: white;
-            border-radius: 24px;
-            padding: 1.6rem 1.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,30,40,0.05);
-            border: 1px solid #d2e3ea;
-            transition: 0.15s ease;
-        }
-
-        .questao-num {
-            background: #1f6c7e;
-            color: white;
-            border-radius: 60px;
-            padding: 0.1rem 1rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.6px;
-        }
-
-        .questao-texto {
-            font-size: 1.1rem;
-            font-weight: 550;
-            margin-bottom: 1.2rem;
-            color: #0c353f;
-        }
-
-        .alternativas {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .alternativa {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            background: #f5f9fb;
-            padding: 0.7rem 1.2rem;
-            border-radius: 16px;
-            border: 1px solid transparent;
-            transition: 0.1s;
-            cursor: pointer;
-            font-weight: 450;
-        }
-
-        .alternativa:hover {
-            background: #e2f0f5;
-            border-color: #479bb4;
-        }
-
-        .alternativa input {
-            accent-color: #146b7e;
-            transform: scale(1.1);
-            margin-top: 2px;
-        }
-
-        .btn-resposta {
-            background: none;
-            border: 1.5px solid #318196;
-            color: #1e5e6e;
-            padding: 0.5rem 1.5rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-            transition: 0.2s;
-            margin-right: 1rem;
-            cursor: pointer;
-        }
-
-        .btn-resposta:hover {
-            background: #318196;
-            color: white;
-        }
-
-        .comentario {
-            margin-top: 1.2rem;
-            padding: 1.2rem 1.5rem;
-            background: #edf7fa;
-            border-radius: 20px;
-            border-left: 6px solid #277c8e;
-            font-size: 0.95rem;
-            color: #0c3d47;
-            display: none;
-        }
-
-        .comentario.mostrar {
-            display: block;
-        }
-
-        .contatos {
-            margin-top: 3.5rem;
-            padding-top: 2rem;
-            border-top: 2px solid #c1dce4;
-            display: flex;
-            justify-content: center;
-            gap: 2.8rem;
-            flex-wrap: wrap;
-            background: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><circle cx="3" cy="3" r="1.2" fill="%2383b9c7"/></svg>');
-        }
-
-        .contato-item {
-            background: white;
-            padding: 0.7rem 2rem;
-            border-radius: 60px;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0e4c5c;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 6px 0 #b2ccd3;
-            border: 1px solid #7aa9b6;
-        }
-
-        .contato-item i {
-            color: #2a7a8c;
-            font-size: 1.8rem;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: #386a78;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 700px) {
-            .container { padding: 1.5rem; }
-            h1 { font-size: 2rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ética Médica de Prova — Foco no que Cai</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --accent2:#06b6d4;
+      --good:#16a34a;
+      --bad:#dc2626;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(37,99,235,.12), transparent 60%),
+                  radial-gradient(900px 500px at 110% 10%, rgba(6,182,212,.10), transparent 50%),
+                  var(--bg);
+      color:var(--ink);
+      font-family: var(--sans);
+      line-height:1.45;
+    }
+    header{
+      padding: 28px 16px 10px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(37,99,235,1), rgba(6,182,212,1));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .titleblock h1{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .titleblock p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(8px);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent)}
+    .dot.c2{background:var(--accent2)}
+    .dot.c3{background:#f59e0b}
+    .dot.c4{background:#8b5cf6}
+    main{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 16px 60px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+    }
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size: 16px;
+    }
+    .sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .barwrap{
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.02);
+      padding: 10px;
+      border-radius: 14px;
+    }
+    .stackbar{
+      height: 18px;
+      border-radius: 999px;
+      overflow:hidden;
+      display:flex;
+      box-shadow: inset 0 0 0 1px rgba(2,6,23,.05);
+      background:#e5e7eb;
+    }
+    .seg{height:100%}
+    .seg.aut{background: var(--accent)}
+    .seg.sig{background: var(--accent2)}
+    .seg.pub{background: #f59e0b}
+    .seg.urg{background: #8b5cf6}
+    .seg.ort{background: #10b981}
+    .seg.pron{background: #ef4444}
+    .legend{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px 14px;
+      margin-top:10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legitem{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .lleft{display:flex;align-items:center;gap:8px}
+    .sw{width:10px;height:10px;border-radius:3px}
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 6px;
+      border:1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(2,6,23,.02);
+      color: var(--muted);
+    }
+    .note{
+      margin-top:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px dashed rgba(37,99,235,.35);
+      background: rgba(37,99,235,.06);
+      color: #1e3a8a;
+      font-size: 12.5px;
+    }
+    .topiclist{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255,255,255,.65);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    details p, details ul{
+      margin:8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    details ul{padding-left: 16px}
+    .quizhead{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .meter{
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .progress{
+      width: 220px;
+      height: 10px;
+      background: rgba(2,6,23,.06);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      overflow:hidden;
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius:999px;
+      transition: width .25s ease;
+    }
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap}
+    button{
+      border:1px solid var(--line);
+      background: white;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: transform .05s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 8px 18px rgba(2,6,23,.06);
+    }
+    button:hover{border-color: rgba(37,99,235,.35)}
+    button:active{transform: translateY(1px)}
+    .primary{
+      border-color: rgba(37,99,235,.35);
+      background: linear-gradient(180deg, rgba(37,99,235,.10), rgba(6,182,212,.08));
+    }
+    .ghost{
+      background: transparent;
+      box-shadow:none;
+    }
+    .qwrap{
+      display:grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .qcard{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .qmeta{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .tag{
+      font-size: 11px;
+      color: var(--muted);
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.02);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .qtitle{
+      margin:0;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing:.1px;
+    }
+    .qtext{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .opts{
+      margin-top: 12px;
+      display:grid;
+      gap:8px;
+    }
+    .opt{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      border:1px solid var(--line);
+      background: white;
+      padding: 10px 10px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition: border-color .15s ease, transform .05s ease;
+    }
+    .opt:hover{border-color: rgba(37,99,235,.35)}
+    .opt:active{transform: translateY(1px)}
+    .opt input{margin-top:2px}
+    .opt .olabel{
+      font-size: 13.5px;
+      color: var(--ink);
+    }
+    .actions{
+      margin-top: 10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .feedback{
+      margin-top: 10px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 13px;
+      border:1px solid var(--line);
+      background: rgba(2,6,23,.02);
+      color: var(--muted);
+      display:none;
+    }
+    .feedback.good{
+      display:block;
+      border-color: rgba(22,163,74,.25);
+      background: rgba(22,163,74,.08);
+      color: #14532d;
+    }
+    .feedback.bad{
+      display:block;
+      border-color: rgba(220,38,38,.25);
+      background: rgba(220,38,38,.08);
+      color: #7f1d1d;
+    }
+    footer{
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 14px 16px;
+      border-top: 1px solid var(--line);
+    }
+    .small{
+      font-size: 12px; color: var(--muted);
+    }
+    .callout{
+      margin-top:12px;
+      border:1px solid rgba(6,182,212,.28);
+      background: rgba(6,182,212,.07);
+      border-radius: 16px;
+      padding: 12px;
+      color: #0f3d4a;
+      font-size: 13px;
+    }
+    .twoCols{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 720px){
+      .twoCols{grid-template-columns: 1fr}
+      .progress{width: 100%}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- cabeçalho hero -->
-        <div class="hero">
-            <div>
-                <span class="badge"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i> MÉTODO ORLANDO ABREU</span>
-                <h1>ética estratégica<br>para provas</h1>
-                <div class="sub">o que realmente cai · como é cobrado</div>
-            </div>
-            <div style="font-size: 2.8rem; color: #1b6579;">
-                <i class="fas fa-file-alt"></i>
-            </div>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="titleblock">
+          <h1>Ética Médica de Prova — Foco no que REALMENTE cai</h1>
+          <p>Resumo didático + 50 questões interativas (média-alta) com comentários imediatos.</p>
         </div>
-
-        <!-- GRÁFICO + rodapé explicativo (o que mais cai) -->
-        <div class="chart-section">
-            <div class="chart-box">
-                <canvas id="eticaChart" width="300" height="300" style="max-width:100%; height:auto; background: transparent;"></canvas>
-                <p style="text-align: center; margin-top: 0.5rem; font-weight: 600; color: #1d697b;"><i class="fas fa-chart-pie"></i> incidência em provas (últimos 5 anos)</p>
-            </div>
-            <div class="chart-footnote">
-                <div class="footnote-card">
-                    <h3><i class="fas fa-bullseye" style="color: #1c6c7f;"></i> Foco absoluto: o que realmente cai</h3>
-                    <ul class="highlight-list">
-                        <li><i class="fas fa-check-circle"></i> <strong>Deveres e vedações</strong> <span class="porcentagem-span">34%</span> — art. 5º e 7º, campeões de questões.</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Princípios fundamentais</strong> <span class="porcentagem-span">28%</span> — moralidade, eficiência, dignidade.</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Impedimentos e incompatibilidades</strong> <span class="porcentagem-span">18%</span> — situações concretas.</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Infrações e sanções</strong> <span class="porcentagem-span">12%</span> — multa, censura, cassação.</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Comissões de Ética</strong> <span class="porcentagem-span">8%</span> — procedimento e competência.</li>
-                    </ul>
-                    <p style="margin-top: 1rem; background: white; padding: 0.7rem; border-radius: 16px; border-left: 4px solid #176c7e;"><i class="fas fa-lightbulb"></i> <strong>tática Orlando Abreu:</strong> domine os 34% de deveres/vedações e você cobre 1/3 da prova!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SUBTEMA DESTRINCHADO: Código de Ética por Orlando Abreu (desenvolvido) -->
-        <div class="doutrina">
-            <h2>
-                <i class="fas fa-code-branch"></i> Código de Ética descomplicado 
-                <span class="autor-tag"><i class="fas fa-pen-fancy"></i> desenvolvido por Orlando Abreu</span>
-            </h2>
-            <div class="grid-subtemas">
-                <div class="subitem">
-                    <i class="fas fa-scale-balanced"></i>
-                    <div><strong>Princípios</strong> — legalidade, impessoalidade, moralidade, publicidade, eficiência (L.I.M.P.E.). Cai como “núcleo ético”.</div>
-                </div>
-                <div class="subitem">
-                    <i class="fas fa-hand"></i>
-                    <div><strong>Deveres funcionais</strong> — exercer com zelo, tratar bem, atender com presteza. 75% das bancas cobram exemplos.</div>
-                </div>
-                <div class="subitem">
-                    <i class="fas fa-ban"></i>
-                    <div><strong>Vedações típicas</strong> — ausentar-se injustificadamente, usar cargo para proveito pessoal, revelar segredo.</div>
-                </div>
-                <div class="subitem">
-                    <i class="fas fa-gavel"></i>
-                    <div><strong>Infrações & sanções</strong> — advertência, censura, multa, suspensão, demissão. Ênfase em censura ética X suspensão.</div>
-                </div>
-                <div class="subitem">
-                    <i class="fas fa-people-arrows"></i>
-                    <div><strong>Comissão de Ética</strong> — apuração, rito sumário, dever de sigilo. O "como cai": prazos e composição.</div>
-                </div>
-                <div class="subitem">
-                    <i class="fas fa-briefcase"></i>
-                    <div><strong>Impedimentos</strong> — conflito de interesses, parentesco, assessorar órgão fiscalizado. Muito explorado.</div>
-                </div>
-            </div>
-            <p style="margin-top: 1.8rem; font-style: italic; background: #dbe9ef; padding: 1rem; border-radius: 18px;"><i class="fas fa-quote-left" style="color: #1a6678;"></i> Orlando Abreu sistematizou os 7 eixos de cobrança. Dica: associe cada dever a uma palavra‑chave. Assim você resolve por eliminação.</p>
-        </div>
-
-        <!-- 50 QUESTÕES INTERATIVAS (dificuldade média-alta, resposta comentada) -->
-        <div class="questoes-section">
-            <div class="section-title">
-                <h2><i class="fas fa-tasks"></i> 50 simulações comentadas</h2>
-                <span style="background: #0b4f5e; color: white; padding: 0.3rem 1.3rem; border-radius: 40px; font-weight: 600;"><i class="fas fa-brain"></i> média/alta</span>
-            </div>
-            <p style="margin-bottom: 1.8rem; color: #255f6b;">clique na alternativa e depois em "ver resp. comentada" • todas com padrão de prova</p>
-
-            <div id="lista-questoes">
-                <!-- As 50 questões serão geradas via JS (para otimizar e não poluir HTML, mas com fallback) -->
-            </div>
-            <!-- botão para mostrar mais? já temos 50, vai estar tudo aqui -->
-        </div>
-
-        <!-- CONTATOS RODAPÉ (exatamente como solicitado) -->
-        <div class="contatos">
-            <div class="contato-item">
-                <i class="fas fa-phone-alt"></i> 9199873835
-            </div>
-            <div class="contato-item">
-                <i class="fas fa-phone-alt"></i> 92980333
-            </div>
-            <div class="contato-item">
-                <i class="fas fa-envelope"></i> metodo@etica.pro
-            </div>
-        </div>
-        <footer>
-            <i class="fas fa-lock-open" style="opacity: 0.7;"></i> infoproduto estratégico · Código de Ética brasileiro · todos os direitos reservados
-        </footer>
+      </div>
+      <div class="pillrow">
+        <div class="pill"><span class="dot"></span>Estratégia de banca</div>
+        <div class="pill"><span class="dot c2"></span>Casos clínico-éticos</div>
+        <div class="pill"><span class="dot c3"></span>Pegadinhas clássicas</div>
+        <div class="pill"><span class="dot c4"></span>Treino com feedback</div>
+      </div>
     </div>
+  </header>
 
-    <script>
-        // ========= GRÁFICO DE ROSCA (DONUT) ==========
-        const ctx = document.getElementById('eticaChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Deveres/Vedações', 'Princípios', 'Impedimentos', 'Infrações/Sanções', 'Comissões'],
-                datasets: [{
-                    data: [34, 28, 18, 12, 8],
-                    backgroundColor: ['#1e7e8c', '#3596a8', '#58aeb9', '#82c2cc', '#b1d9df'],
-                    borderWidth: 0,
-                    hoverOffset: 7,
-                    borderRadius: 6,
-                    spacing: 8,
-                }]
-            },
-            options: {
-                cutout: '70%',
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { backgroundColor: '#0e4c5c', titleColor: '#f0fcff' }
-                }
-            }
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>Mapa de incidência em prova (percentual típico)</h2>
+        <p class="sub">
+          Isso aqui é o “GPS de questão”: banca gosta de conflito prático. Não é só decorar regra — é decidir conduta.
+        </p>
+
+        <div class="barwrap">
+          <div class="stackbar" title="Distribuição aproximada do que mais cai">
+            <div class="seg aut" style="width:20%"></div>
+            <div class="seg sig" style="width:20%"></div>
+            <div class="seg pub" style="width:15%"></div>
+            <div class="seg urg" style="width:15%"></div>
+            <div class="seg ort" style="width:10%"></div>
+            <div class="seg pron" style="width:10%"></div>
+            <div class="seg" style="width:10%;background:#64748b"></div>
+          </div>
+
+          <div class="legend">
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:var(--accent)"></span>Autonomia/Consentimento</div>
+              <span class="kbd">20%</span>
+            </div>
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:var(--accent2)"></span>Sigilo e exceções</div>
+              <span class="kbd">20%</span>
+            </div>
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:#f59e0b"></span>Publicidade médica</div>
+              <span class="kbd">15%</span>
+            </div>
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:#8b5cf6"></span>Urgência/Abandono</div>
+              <span class="kbd">15%</span>
+            </div>
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:#10b981"></span>Ortotanásia/Paliativos</div>
+              <span class="kbd">10%</span>
+            </div>
+            <div class="legitem">
+              <div class="lleft"><span class="sw" style="background:#ef4444"></span>Prontuário/Documentação</div>
+              <span class="kbd">10%</span>
+            </div>
+            <div class="legitem" style="grid-column: 1 / -1;">
+              <div class="lleft"><span class="sw" style="background:#64748b"></span>Relação entre médicos + pesquisa + conflitos de interesse</div>
+              <span class="kbd">10%</span>
+            </div>
+          </div>
+
+          <div class="note">
+            <b>Rodapé do gráfico (o ouro da prova):</b> banca não pergunta “qual artigo?”. Ela pergunta:
+            <b>quem decide</b> (autonomia), <b>quando posso falar</b> (sigilo), <b>o que não posso vender/mostrar</b> (publicidade),
+            <b>o que jamais posso negar</b> (urgência), <b>como lidar com terminalidade</b> (ortotanásia) e
+            <b>como registrar sem se enforcar depois</b> (prontuário).
+          </div>
+        </div>
+
+        <div class="topiclist">
+          <details open>
+            <summary>1) Autonomia + Consentimento (top 1 em pegadinha)</summary>
+            <p>
+              Regra-mãe: paciente capaz decide. O médico informa com clareza (benefícios, riscos, alternativas).
+            </p>
+            <ul>
+              <li><b>Recusa de tratamento</b>: se capaz e consciente, deve ser respeitada (documentar bem).</li>
+              <li><b>Consentimento</b>: não é “assinatura”; é processo (explicar e checar compreensão).</li>
+              <li><b>Incapaz / urgência</b>: em risco iminente, a equipe age pelo melhor interesse.</li>
+              <li><b>Menores</b>: considerar maturidade, representantes legais e melhor interesse.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>2) Sigilo profissional (e as 3 exceções)</summary>
+            <p>Sigilo é regra. Exceção só quando: <b>dever legal</b>, <b>justa causa</b> ou <b>autorização</b>.</p>
+            <ul>
+              <li><b>Família</b>: não é automaticamente autorizada a saber.</li>
+              <li><b>Prontuário</b>: pertence ao paciente; acesso por cópia conforme regra.</li>
+              <li><b>Notificação compulsória</b>: comunicação às autoridades sanitárias não é “quebra antiética”.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>3) Publicidade médica (onde muita gente roda)</summary>
+            <p>O que banca quer: identificar <b>sensacionalismo</b>, <b>promessa</b>, <b>captação</b>, <b>exposição de paciente</b>.</p>
+            <ul>
+              <li>Proibido: “garanto resultado”, “antes e depois”, preço, sorteio, autopromoção sensacionalista.</li>
+              <li>Mesmo com autorização do paciente, <b>exposição pode ser irregular</b> dependendo do contexto.</li>
+              <li>Permitido: conteúdo educativo sem identificação/indução comercial.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>4) Urgência, abandono e continuidade do cuidado</summary>
+            <p>Regra de prova: urgência/emergência = <b>não se nega</b>. E abandono é “sumir” sem garantir transição segura.</p>
+            <ul>
+              <li>Você pode encerrar acompanhamento? Pode, desde que <b>não haja abandono</b> (orienta, encaminha, registra).</li>
+              <li>Greve? Pode, mas mantendo urgência/emergência.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>5) Ortotanásia / cuidados paliativos</summary>
+            <p>
+              Eutanásia é proibida. Ortotanásia (não prolongar artificialmente sofrimento) é aceita na lógica ética.
+            </p>
+            <ul>
+              <li>Foco: conforto, proporcionalidade terapêutica, comunicação e registro.</li>
+              <li>Decisão compartilhada com paciente/família (quando cabível) e equipe.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>6) Prontuário: seu escudo (ou seu problema)</summary>
+            <p>Questão típica: acesso, cópia, sigilo, registro adequado e sem rasura.</p>
+            <ul>
+              <li>Registro deve ser claro, cronológico, objetivo e suficiente.</li>
+              <li>Não “apagar” informação; corrigir com rastreabilidade.</li>
+              <li>Cópia quando solicitada conforme regra e resguardando terceiros.</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="callout">
+          <b>Como você vai vender isso:</b> “Eu te entrego o que cai + como cai + como pensar a questão.”  
+          Você não vende texto — vende <b>decisão rápida em cenário de prova</b>.
+        </div>
+      </section>
+
+      <aside class="card" id="quizCard">
+        <div class="quizhead">
+          <div>
+            <h2>Treino: 50 questões interativas</h2>
+            <p class="sub">Dificuldade média-alta, estilo banca: caso + conflito + conduta.</p>
+          </div>
+          <div class="meter">
+            <span><b id="score">0</b>/<span id="answered">0</span> respondidas</span>
+            <span class="kbd">Acertos: <b id="hits">0</b></span>
+            <div class="progress" aria-label="Progresso do simulado">
+              <div id="pfill"></div>
+            </div>
+          </div>
+          <div class="btnrow">
+            <button class="primary" id="btnCheckAll">Ver resumo do desempenho</button>
+            <button class="ghost" id="btnReset">Resetar</button>
+          </div>
+        </div>
+
+        <div class="small">
+          Dica de prova: antes de marcar, pense em 3 perguntas: <b>capaz?</b> <b>urgente?</b> <b>tem dever legal?</b>
+        </div>
+
+        <div class="qwrap" id="quiz"></div>
+
+        <footer>
+          <b>Nota:</b> Conteúdo educativo para estudo. Para redação formal em prova, você pode citar “princípios do Código de Ética Médica (CFM)” sem precisar decorar artigo.
+          <div style="margin-top:10px">
+            <b>Próximos upgrades (pra virar infoproduto premium):</b>
+            <ul>
+              <li>Modo “simulado cronometrado” + ranking por tema</li>
+              <li>Banco de questões por banca (CESPE, FCC, FGV etc.) com estilo textual ajustado</li>
+              <li>Exportar PDF do desempenho (acertos por tema) + plano de revisão automático</li>
+              <li>Versão PWA offline (instalável no celular) com salvamento local</li>
+            </ul>
+          </div>
+        </footer>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    // ====== Banco de questões (50) ======
+    // Estrutura: { tema, enunciado, alternativas:[...], correta: idx, comentario: "..." }
+    const questions = [
+      // AUTONOMIA / CONSENTIMENTO
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente lúcido e orientado, com risco de piora, recusa procedimento indicado após explicação completa. Conduta ética mais adequada?",
+        alternativas:[
+          "Realizar o procedimento mesmo assim, pois é o melhor para o paciente.",
+          "Respeitar a recusa, registrar a decisão e orientar sobre riscos e alternativas.",
+          "Solicitar assinatura do termo e encerrar a consulta sem orientações adicionais.",
+          "Comunicar a família e pedir que ela autorize em lugar do paciente."
+        ],
+        correta:1,
+        comentario:"Autonomia: paciente capaz decide. O papel do médico é informar, orientar, oferecer alternativas e documentar adequadamente a recusa."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Em situação de urgência com paciente inconsciente e sem acompanhantes, qual conduta ética é mais compatível com a boa prática?",
+        alternativas:[
+          "Aguardar autorização familiar para qualquer intervenção.",
+          "Intervir conforme melhor interesse do paciente e registrar a decisão clínica.",
+          "Negar atendimento por ausência de consentimento formal.",
+          "Realizar apenas medidas paliativas sem investigação."
+        ],
+        correta:1,
+        comentario:"Em risco iminente e incapacidade de consentir, o médico deve agir em benefício do paciente (melhor interesse), registrando justificativa."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente solicita que o médico omita informações relevantes sobre diagnóstico e riscos antes de um procedimento, dizendo que 'não quer saber'. Conduta mais adequada?",
+        alternativas:[
+          "Aceitar e prosseguir, pois a vontade do paciente é soberana.",
+          "Explicar que a decisão informada exige compreensão mínima e verificar preferência por nível de informação, respeitando limites e segurança.",
+          "Obrigar o paciente a ouvir tudo detalhadamente, mesmo contra sua vontade.",
+          "Informar apenas à família e pedir que ela decida."
+        ],
+        correta:1,
+        comentario:"Autonomia inclui preferências, mas decisão terapêutica exige base mínima de informação. Ajuste a comunicação, confirme entendimento essencial e registre."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente deseja alta contra recomendação. Qual combinação é mais correta?",
+        alternativas:[
+          "Impedir a saída e chamar segurança para evitar risco.",
+          "Registrar orientação, riscos, capacidade do paciente, e oferecer retorno/alternativas.",
+          "Liberar sem explicar nada para evitar conflito.",
+          "Condicionar alta à assinatura de documento que isente o médico de toda responsabilidade."
+        ],
+        correta:1,
+        comentario:"Alta a pedido: orientar, avaliar capacidade, registrar, oferecer retorno e medidas de segurança. Termos não 'anulam' dever de cuidado."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente pede 'um antibiótico forte' sem avaliação. Ética e boa prática sugerem:",
+        alternativas:[
+          "Prescrever para satisfazer o paciente e evitar reclamação.",
+          "Negar e orientar, oferecendo avaliação adequada antes de prescrever.",
+          "Prescrever e pedir exames depois, só para 'confirmar'.",
+          "Prescrever e orientar que interrompa quando melhorar."
+        ],
+        correta:1,
+        comentario:"Prescrição exige indicação e avaliação. Ceder à pressão do paciente é armadilha comum de prova (e de vida)."
+      },
+
+      // SIGILO
+      {
+        tema:"Sigilo",
+        enunciado:"Familiar solicita detalhes do diagnóstico de um adulto capaz, sem autorização do paciente. Conduta ética?",
+        alternativas:[
+          "Revelar, pois família 'tem direito' de saber.",
+          "Revelar parcialmente para reduzir ansiedade da família.",
+          "Manter sigilo e sugerir que o paciente autorize ou participe da conversa.",
+          "Revelar se o familiar insistir e ameaçar processo."
+        ],
+        correta:2,
+        comentario:"Sigilo é regra. Sem autorização do paciente capaz, não se deve revelar informações clínicas à família."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Em qual cenário a quebra de sigilo tende a ser mais defensável na lógica de prova?",
+        alternativas:[
+          "Para tranquilizar a equipe administrativa.",
+          "Por curiosidade de colega fora do caso.",
+          "Por dever legal / notificação compulsória prevista.",
+          "Para melhorar a imagem do serviço."
+        ],
+        correta:2,
+        comentario:"Exceções clássicas: dever legal, justa causa ou autorização. Notificação compulsória é exemplo de dever legal."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Paciente pede cópia do prontuário. Conduta correta?",
+        alternativas:[
+          "Negar, pois prontuário é do hospital/médico.",
+          "Fornecer cópia conforme normas do serviço e registrar entrega.",
+          "Fornecer apenas se houver ordem judicial.",
+          "Fornecer somente se o paciente assinar termo de confidencialidade."
+        ],
+        correta:1,
+        comentario:"Em geral, o paciente tem direito ao acesso/recebimento de cópia conforme regras; registrar a entrega é boa prática."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Médico comenta caso identificável (nome, foto, detalhes) em grupo de mensagens fora do contexto assistencial. Isso é:",
+        alternativas:[
+          "Aceitável se o grupo for de médicos.",
+          "Aceitável se o paciente for famoso.",
+          "Violação de sigilo e exposição indevida.",
+          "Aceitável se não houver má intenção."
+        ],
+        correta:2,
+        comentario:"Sigilo inclui evitar identificação direta ou indireta. Grupos informais são armadilha enorme."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Colega pede informações de paciente 'por amizade'. Conduta mais adequada?",
+        alternativas:[
+          "Passar informações mínimas para ajudar.",
+          "Negar e orientar que o pedido deve ter base assistencial e autorização apropriada.",
+          "Passar tudo, pois é colega médico.",
+          "Passar apenas diagnóstico sem detalhes."
+        ],
+        correta:1,
+        comentario:"Sigilo não se flexibiliza por amizade ou curiosidade. Compartilhamento só quando necessário para assistência e conforme regras."
+      },
+
+      // PUBLICIDADE
+      {
+        tema:"Publicidade",
+        enunciado:"Qual anúncio é mais provavelmente antiético?",
+        alternativas:[
+          "Post educativo sobre prevenção, sem prometer cura e sem identificar pacientes.",
+          "Divulgação de título de especialista reconhecido e local de atendimento.",
+          "Vídeo com 'antes e depois' de paciente identificável, mesmo com autorização.",
+          "Informação de horários de funcionamento da clínica."
+        ],
+        correta:2,
+        comentario:"Antes/depois e exposição de pacientes é uma das maiores armadilhas. Mesmo com autorização, pode configurar exploração/sensacionalismo."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Médico posta: 'Garanto resultado em 7 dias'. Isso é:",
+        alternativas:[
+          "Permitido se ele for experiente.",
+          "Permitido se houver evidência científica.",
+          "Proibido por promessa de resultado e caráter sensacionalista.",
+          "Permitido se não mencionar valores."
+        ],
+        correta:2,
+        comentario:"Promessa/garantia de resultado é típica infração cobrada em prova."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Sobre divulgar preço e promoções em serviços médicos, a alternativa mais alinhada à ética é:",
+        alternativas:[
+          "Livre, desde que seja honesto.",
+          "Livre, se o paciente concordar.",
+          "Restrito/problematizado, pois pode configurar mercantilização/captação indevida.",
+          "Obrigatório divulgar preço para transparência."
+        ],
+        correta:2,
+        comentario:"Bancas costumam tratar promoções/preços como mercantilização e captação indevida. Tema recorrente."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Participar de propaganda comercial de medicamento como 'garoto-propaganda' tende a ser:",
+        alternativas:[
+          "Permitido, pois aumenta educação em saúde.",
+          "Permitido se não citar nome do fármaco.",
+          "Problemático/proibido por conflito e caráter promocional.",
+          "Obrigatório em campanhas públicas."
+        ],
+        correta:2,
+        comentario:"Aparecer promovendo produto comercial é clássico conflito de interesse / publicidade irregular."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Qual conteúdo online é mais seguro eticamente?",
+        alternativas:[
+          "Relato detalhado de caso raro com idade, cidade e foto do exame.",
+          "Conteúdo educativo geral sem identificação, com linguagem responsável.",
+          "Print de conversa com paciente (mesmo apagando o nome).",
+          "Vídeo de procedimento com rosto visível, 'para engajar'."
+        ],
+        correta:1,
+        comentario:"Educação em saúde sem identificação e sem sensacionalismo é o caminho mais seguro."
+      },
+
+      // URGÊNCIA / ABANDONO
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Em emergência, médico se recusa a atender por discordar do convênio do paciente. Ética sugere:",
+        alternativas:[
+          "Pode recusar, pois é direito do médico escolher pacientes.",
+          "Deve garantir atendimento em urgência/emergência, independentemente de questões administrativas.",
+          "Pode recusar se houver outro médico de plantão em outro hospital.",
+          "Pode recusar se o paciente estiver agressivo verbalmente."
+        ],
+        correta:1,
+        comentario:"Urgência/emergência: não se nega assistência por motivo administrativo. Depois se resolve a parte burocrática."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"O que caracteriza abandono de paciente de forma mais típica em prova?",
+        alternativas:[
+          "Encerrar acompanhamento com aviso prévio e encaminhamento.",
+          "Deixar de atender sem assegurar continuidade e sem orientar/encaminhar.",
+          "Explicar limitações do serviço e sugerir outra unidade.",
+          "Orientar sinais de alarme e retorno."
+        ],
+        correta:1,
+        comentario:"Abandono é romper a continuidade sem transição segura. Encerrar com encaminhamento e registro tende a ser aceitável."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Greve médica: qual conduta tende a ser exigida eticamente?",
+        alternativas:[
+          "Suspender tudo, inclusive urgência, para aumentar pressão.",
+          "Manter assistência integral 24h e não parar nada.",
+          "Manter atendimento de urgência/emergência e organizar comunicação.",
+          "Atender só conhecidos."
+        ],
+        correta:2,
+        comentario:"Mesmo em greve, urgência/emergência deve ser garantida."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Paciente agressivo em pronto atendimento: conduta mais compatível com ética e segurança?",
+        alternativas:[
+          "Recusar todo atendimento imediatamente.",
+          "Atender apenas se ele pedir desculpas.",
+          "Garantir medidas de segurança, acolhimento e atendimento conforme gravidade; registrar ocorrências.",
+          "Chamar polícia e não avaliar clinicamente."
+        ],
+        correta:2,
+        comentario:"A gravidade clínica manda. Segurança da equipe importa, mas recusa total sem avaliação pode ser erro ético em prova."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Paciente em risco iminente chega sem documentos. Conduta ética?",
+        alternativas:[
+          "Negar até identificação completa.",
+          "Atender de imediato e regularizar cadastro depois.",
+          "Mandar para outra unidade por falta de cadastro.",
+          "Atender apenas após assinatura do termo de responsabilidade."
+        ],
+        correta:1,
+        comentario:"Emergência primeiro. Burocracia depois."
+      },
+
+      // ORTOTANÁSIA / PALIATIVOS
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Paciente terminal, sofrimento importante, família pede 'fazer tudo até o fim' apesar de futilidade terapêutica evidente. Melhor conduta em prova:",
+        alternativas:[
+          "Realizar todas intervenções possíveis, independentemente de benefício.",
+          "Negar qualquer cuidado e suspender tudo imediatamente.",
+          "Discutir proporcionalidade, objetivos de cuidado, conforto, e registrar decisão compartilhada.",
+          "Solicitar que a família assine termo para isentar o médico."
+        ],
+        correta:2,
+        comentario:"Prova cobra proporcionalidade terapêutica e comunicação. Ortotanásia e paliativos: foco em conforto e decisão compartilhada, com registro."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Eutanásia vs ortotanásia: alternativa correta no raciocínio de prova?",
+        alternativas:[
+          "Eutanásia é sempre permitida se houver consentimento.",
+          "Ortotanásia é interromper cuidados básicos como higiene e analgesia.",
+          "Ortotanásia é evitar prolongamento artificial desproporcional, mantendo conforto.",
+          "São sinônimos."
+        ],
+        correta:2,
+        comentario:"Ortotanásia: não prolongar artificialmente sem benefício, mantendo cuidado e conforto. Eutanásia (ato para causar morte) é outra coisa."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Sedação paliativa, quando indicada e bem conduzida, é:",
+        alternativas:[
+          "Sinônimo de eutanásia.",
+          "Eticamente possível quando refratariedade e objetivo é aliviar sofrimento, com registro e comunicação.",
+          "Proibida em qualquer circunstância.",
+          "Obrigatória em todo paciente terminal."
+        ],
+        correta:1,
+        comentario:"Em prova, sedação paliativa pode ser aceitável se objetivo é conforto, proporcionalidade e documentação."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Ordem de não reanimar (DNR): conduta mais alinhada?",
+        alternativas:[
+          "Nunca pode existir.",
+          "Pode ser discutida conforme contexto, valores do paciente, prognóstico e registrada.",
+          "Só pode ser decidida pela família, nunca pelo paciente.",
+          "É sempre antiética."
+        ],
+        correta:1,
+        comentario:"DNR em prova aparece como decisão proporcional e alinhada a objetivos de cuidado — sempre com discussão e registro."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Qual é o maior 'erro de prova' em terminalidade?",
+        alternativas:[
+          "Comunicar prognóstico com empatia.",
+          "Registrar decisões no prontuário.",
+          "Confundir conforto com abandono e suspender analgesia/hidratação sem critério.",
+          "Planejar cuidados paliativos."
+        ],
+        correta:2,
+        comentario:"Paliativo não é abandono. Conforto e cuidado continuam. Banca adora essa pegadinha."
+      },
+
+      // PRONTUÁRIO / DOCUMENTAÇÃO
+      {
+        tema:"Prontuário",
+        enunciado:"Sobre registro em prontuário, o que tende a ser mais correto?",
+        alternativas:[
+          "Pode rasurar se assinar ao lado.",
+          "Pode apagar e reescrever para ficar bonito.",
+          "Deve registrar de forma clara, objetiva e com rastreabilidade de correções.",
+          "Não precisa registrar recusa de procedimento."
+        ],
+        correta:2,
+        comentario:"Registro é proteção do paciente e do profissional. Correção deve manter rastreabilidade; recusa e orientações relevantes devem constar."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Paciente solicita cópia de exames e evoluções. Conduta melhor?",
+        alternativas:[
+          "Negar e dizer que só com advogado.",
+          "Fornecer conforme procedimento do serviço e registrar entrega.",
+          "Entregar apenas se pagar taxa obrigatória.",
+          "Entregar somente se assinar que não processará."
+        ],
+        correta:1,
+        comentario:"A lógica de prova: facilitar acesso conforme norma, com registro de entrega. Termos de 'não processar' não são solução mágica."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Prontuário pode ser compartilhado integralmente com terceiros (empregador, escola) por solicitação verbal?",
+        alternativas:[
+          "Sim, se o terceiro for 'responsável'.",
+          "Sim, se a intenção for boa.",
+          "Não, salvo autorização adequada ou dever legal; preferir relatório objetivo quando necessário.",
+          "Sim, pois é para o bem do paciente."
+        ],
+        correta:2,
+        comentario:"Terceiros: cuidado. Sem autorização/dever legal, não. Muitas vezes, o correto é emitir relatório com mínimo necessário."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Registrar termo pejorativo sobre paciente no prontuário (ex.: 'paciente chato') é:",
+        alternativas:[
+          "Aceitável como desabafo.",
+          "Inadequado; prontuário deve ser técnico, objetivo e respeitoso.",
+          "Aceitável se o paciente não ler.",
+          "Recomendado para alertar colegas."
+        ],
+        correta:1,
+        comentario:"Prontuário é documento técnico e pode ser acessado. Linguagem deve ser respeitosa e objetiva."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Paciente recusa procedimento. O que não pode faltar no registro?",
+        alternativas:[
+          "Somente a assinatura do paciente.",
+          "Orientações dadas, riscos explicados, capacidade do paciente, e decisão registrada.",
+          "A opinião pessoal do médico sobre o caráter do paciente.",
+          "Nada; o médico não precisa registrar."
+        ],
+        correta:1,
+        comentario:"O registro bom descreve orientação, riscos, alternativas, capacidade e decisão. Isso cai demais."
+      },
+
+      // RELAÇÃO ENTRE MÉDICOS / CONFLITOS / PESQUISA
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Paciente pergunta se o médico anterior 'errou feio'. Conduta mais ética?",
+        alternativas:[
+          "Confirmar que o colega é incompetente para ganhar confiança.",
+          "Evitar julgamento precipitado, focar no caso atual e, se necessário, orientar vias adequadas para avaliação.",
+          "Gravar vídeo criticando o colega para postar como alerta.",
+          "Negar atendimento para não se envolver."
+        ],
+        correta:1,
+        comentario:"Banca cobra respeito entre colegas e foco no cuidado. Críticas públicas e sensacionalismo são erro clássico."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Conflito de interesse: médico recebe comissão por indicar exame/serviço. Isso é:",
+        alternativas:[
+          "Aceitável se o exame for útil.",
+          "Aceitável se o paciente não souber.",
+          "Eticamente problemático por incentivo financeiro e possível indução.",
+          "Obrigatório em clínicas privadas."
+        ],
+        correta:2,
+        comentario:"Relação financeira que influencia indicação é pegadinha de prova: compromete independência e pode caracterizar captação/mercantilização."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Pesquisa com paciente: qual é o núcleo ético mais cobrado?",
+        alternativas:[
+          "Basta autorização do pesquisador.",
+          "Consentimento livre e esclarecido + redução de riscos + transparência + regras éticas.",
+          "Pode omitir riscos para não assustar.",
+          "Pode incluir qualquer pessoa se houver benefício científico."
+        ],
+        correta:1,
+        comentario:"Prova cobra consentimento, risco/benefício, transparência e proteção do participante."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Médico assume paciente internado sem comunicar equipe/assistente, apenas por oportunidade. Em prova, isso tende a ser:",
+        alternativas:[
+          "Ok, porque paciente é livre.",
+          "Problemático se houver desorganização da assistência e desrespeito à condução, salvo situações justificadas.",
+          "Obrigatório para aumentar experiência.",
+          "Recomendado sempre."
+        ],
+        correta:1,
+        comentario:"Banca cobra coordenação, continuidade e respeito profissional. Trocas devem preservar assistência e comunicação."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Ao identificar infração ética grave, a conduta mais compatível com ética profissional é:",
+        alternativas:[
+          "Ignorar para evitar problemas.",
+          "Expor o colega em redes sociais.",
+          "Buscar vias institucionais/CRM e proteger paciente, evitando sensacionalismo.",
+          "Ameaçar o colega com chantagem."
+        ],
+        correta:2,
+        comentario:"Denúncia deve seguir canais formais e com foco na proteção do paciente, não em linchamento público."
+      },
+
+      // ====== Agora completando até 50 com variações média-alta ======
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente com baixa escolaridade concorda com procedimento, mas não consegue repetir com suas palavras os riscos essenciais. Melhor atitude?",
+        alternativas:[
+          "Prosseguir; assinatura basta.",
+          "Reexplicar em linguagem simples, checar compreensão e só então decidir.",
+          "Transferir a explicação para a recepção.",
+          "Cancelar definitivamente e nunca mais oferecer."
+        ],
+        correta:1,
+        comentario:"Consentimento é compreensão. Prova ama isso: adaptar linguagem e checar entendimento."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Médico usa caso clínico em aula, sem nome, mas com detalhes que permitem reconhecer o paciente na cidade pequena. Isso é:",
+        alternativas:[
+          "Ok, pois não citou nome.",
+          "Violação potencial, por identificação indireta.",
+          "Obrigatório, pois é ensino.",
+          "Ok se for para estudantes de medicina."
+        ],
+        correta:1,
+        comentario:"Identificação indireta também fere sigilo. Cidade pequena = risco alto."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Médico divulga 'especialista' sem título reconhecido/registrado. Em prova, isso tende a ser:",
+        alternativas:[
+          "Normal; é apenas marketing.",
+          "Irregular, pois pode induzir erro e configurar publicidade enganosa.",
+          "Permitido se tiver cursos livres.",
+          "Obrigatório para competir."
+        ],
+        correta:1,
+        comentario:"Banca cobra veracidade e não indução do público ao erro."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Médico encerra vínculo com paciente agressivo, mas fornece encaminhamento e mantém suporte por tempo razoável até transição. Isso tende a ser:",
+        alternativas:[
+          "Abandono inevitável.",
+          "Conduta possível, desde que não haja risco imediato e haja continuidade/encaminhamento.",
+          "Sempre proibido encerrar vínculo.",
+          "Permitido apenas se a família autorizar."
+        ],
+        correta:1,
+        comentario:"Encerrar vínculo pode ser permitido; o erro é abandonar sem transição segura."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Paciente terminal pede 'não quero intubação'. Está lúcido. Conduta?",
+        alternativas:[
+          "Ignorar e intubar se piorar, pois é dever salvar.",
+          "Respeitar vontade, discutir planos de cuidado e registrar diretivas/decisão.",
+          "Pedir que a família decida no lugar.",
+          "Transferir sem registrar."
+        ],
+        correta:1,
+        comentario:"Autonomia + objetivos de cuidado. Registrar planejamento é ponto de prova."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Erro em prescrição anotada no prontuário: melhor correção?",
+        alternativas:[
+          "Apagar e reescrever.",
+          "Rasurar até ficar ilegível.",
+          "Corrigir com rastreabilidade (data/hora/assinatura), mantendo registro do que ocorreu.",
+          "Fingir que não aconteceu."
+        ],
+        correta:2,
+        comentario:"Rastreabilidade protege paciente e equipe."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Médico recebe presente caro de indústria após prescrever marca específica. Em prova, isso sugere:",
+        alternativas:[
+          "Relação normal sem impacto.",
+          "Potencial conflito de interesse e influência indevida.",
+          "Obrigação de prescrever aquela marca.",
+          "Conduta recomendada."
+        ],
+        correta:1,
+        comentario:"Banca associa benefícios materiais à perda de independência clínica."
+      },
+
+      // 15 a 50
+      {
+        tema:"Sigilo",
+        enunciado:"Qual atitude melhor preserva sigilo ao enviar relatório para perícia/INSS (quando cabível)?",
+        alternativas:[
+          "Enviar prontuário completo com tudo que existir.",
+          "Enviar relatório objetivo com mínimo necessário, conforme exigência e autorização adequada.",
+          "Enviar áudio informal pelo WhatsApp.",
+          "Postar em plataforma pública e mandar o link."
+        ],
+        correta:1,
+        comentario:"Princípio do mínimo necessário: relatar o essencial e resguardar dados sensíveis."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Live respondendo dúvidas de saúde: o que mais evita infração?",
+        alternativas:[
+          "Fazer diagnóstico individual em público para mostrar autoridade.",
+          "Dar orientações gerais e recomendar consulta presencial quando necessário.",
+          "Prometer tratamento exclusivo com desconto na live.",
+          "Expor exames enviados por seguidores com nome apagado."
+        ],
+        correta:1,
+        comentario:"Conteúdo geral é aceitável; diagnóstico/conduta individual em público e captação é pegadinha."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Consentimento para procedimento invasivo em paciente sedado previamente (sem urgência) foi obtido apenas com familiar, sem conversa prévia com o paciente. Em prova:",
+        alternativas:[
+          "Ok, familiar sempre pode decidir.",
+          "Inadequado: paciente capaz deveria ter sido informado/consentido antes, salvo impossibilidade.",
+          "Ok se o familiar assinar termo.",
+          "Indiferente eticamente."
+        ],
+        correta:1,
+        comentario:"Se o paciente era capaz antes, deveria consentir. Familiar substitui quando paciente é incapaz ou impossibilitado."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Plantão lotado: médico seleciona atendimento por 'ordem de chegada' ignorando gravidade. Isso é:",
+        alternativas:[
+          "Correto; é o mais justo.",
+          "Potencialmente incorreto; prioridade deve considerar gravidade clínica (triagem).",
+          "Obrigatório em todo serviço.",
+          "Recomendado para evitar reclamações."
+        ],
+        correta:1,
+        comentario:"Banca puxa triagem e gravidade. Ordem de chegada não é critério soberano em urgência."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Paciente pede alteração de registro verdadeiro (ex.: retirar anotação de recusa). Conduta?",
+        alternativas:[
+          "Alterar para agradar e evitar conflito.",
+          "Manter registro fidedigno; se necessário, adicionar adendo com nova informação, sem apagar o anterior.",
+          "Apagar e reescrever com outra narrativa.",
+          "Excluir prontuário."
+        ],
+        correta:1,
+        comentario:"Prontuário deve refletir fatos. Adendo é diferente de apagar."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Uso de depoimentos de pacientes (“melhor médico do mundo”) em posts patrocinados, com identificação, tende a ser:",
+        alternativas:[
+          "Totalmente permitido se paciente autorizar.",
+          "Potencial infração por sensacionalismo/captação e exposição.",
+          "Obrigatório em marketing moderno.",
+          "Permitido apenas no TikTok."
+        ],
+        correta:1,
+        comentario:"Depoimento identificável e conteúdo promocional pode ser interpretado como captação/sensacionalismo."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Em notificação compulsória, o médico deve:",
+        alternativas:[
+          "Avisar apenas a mídia para alertar a população.",
+          "Notificar conforme normas sanitárias e manter sigilo fora do canal devido.",
+          "Não notificar para preservar sigilo absoluto.",
+          "Notificar e postar o caso para educação."
+        ],
+        correta:1,
+        comentario:"Notificação é canal oficial. Sigilo se mantém fora do dever legal."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Médico usa acesso ao prontuário do hospital para pesquisar casos para artigo sem consentimento/norma. Em prova:",
+        alternativas:[
+          "Ok se for para ciência.",
+          "Pode ser irregular; pesquisa com dados exige regras éticas e proteção de dados.",
+          "Ok se não citar nomes.",
+          "Ok se for residente."
+        ],
+        correta:1,
+        comentario:"Prova costuma cobrar governança de dados e regras éticas em pesquisa."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Família pede que o médico 'não conte o diagnóstico' ao paciente capaz. Conduta mais alinhada?",
+        alternativas:[
+          "Concordar sempre; família manda.",
+          "Avaliar desejo do paciente sobre informação, priorizar autonomia e comunicação adequada.",
+          "Mentir para o paciente para evitar sofrimento.",
+          "Ignorar família e ser bruto."
+        ],
+        correta:1,
+        comentario:"Paciente capaz é titular da informação. Você pode ajustar comunicação, mas ocultar automaticamente é erro típico."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Consentimento informado: qual afirmação é mais correta?",
+        alternativas:[
+          "É apenas um formulário assinado.",
+          "É processo de comunicação + compreensão + voluntariedade + registro.",
+          "Dispensa conversa se a pessoa confia.",
+          "Serve para isentar o médico de responsabilidade."
+        ],
+        correta:1,
+        comentario:"Prova ama: não é papel, é processo. E não serve para 'blindar' negligência."
+      },
+
+      // 26-50: mais casuística
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Paciente com dor torácica típica é orientado a voltar outro dia porque 'não tem vaga'. Em prova, isso tende a ser:",
+        alternativas:[
+          "Adequado se a recepção decidir.",
+          "Grave falha por possível urgência, exigindo avaliação e encaminhamento apropriado.",
+          "Adequado se ele tiver convênio.",
+          "Normal em serviços públicos."
+        ],
+        correta:1,
+        comentario:"Dor torácica típica = potencial emergência. Prova cobra avaliação/encaminhamento, não postergação sem triagem."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Médico faz sorteio de consulta em rede social para aumentar seguidores. Isso tende a ser:",
+        alternativas:[
+          "Estratégia livre de marketing.",
+          "Captação indevida/mercantilização, frequentemente considerada infração.",
+          "Obrigatório para competir.",
+          "Permitido se não houver prêmio em dinheiro."
+        ],
+        correta:1,
+        comentario:"Sorteio e promoções são frequentemente interpretados como captação e mercantilização."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Entregar informação clínica a seguradora sem autorização do paciente, em situação não prevista por lei, é:",
+        alternativas:[
+          "Adequado, pois a seguradora paga.",
+          "Potencial quebra de sigilo.",
+          "Obrigatório sempre.",
+          "Adequado se for por e-mail."
+        ],
+        correta:1,
+        comentario:"Sem autorização ou dever legal, repasse a terceiro é quebra de sigilo."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Qual registro é mais 'prova-friendly' e tecnicamente correto?",
+        alternativas:[
+          "“Paciente dramático, não coopera.”",
+          "“Queixa: dor 8/10 há 2h, sudorese; ECG solicitado; orientado sinais de alarme; paciente recusou X após esclarecimento.”",
+          "“Tudo bem, nada demais.”",
+          "“Suspeito que esteja mentindo.”"
+        ],
+        correta:1,
+        comentario:"Prontuário bom descreve fatos, medidas, raciocínio e orientação — sem julgamento moral."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Médico recebe bônus por meta de prescrição de determinado produto. Conduta ética esperada?",
+        alternativas:[
+          "Aceitar e aumentar prescrição.",
+          "Recusar incentivo que comprometa autonomia clínica e transparência.",
+          "Aceitar e não contar a ninguém.",
+          "Aceitar se o produto for bom."
+        ],
+        correta:1,
+        comentario:"Incentivo atrelado a conduta clínica = conflito de interesse clássico."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente pede segunda opinião. Conduta?",
+        alternativas:[
+          "Desencorajar e dizer que é desrespeito.",
+          "Facilitar, fornecendo informações necessárias e mantendo postura profissional.",
+          "Recusar prontuário e exames.",
+          "Encerrar relação imediatamente sem orientação."
+        ],
+        correta:1,
+        comentario:"Segunda opinião é direito do paciente. Prova cobra maturidade profissional."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Publicar foto com paciente em consulta para “humanizar”, com rosto e nome visíveis, mesmo com consentimento, tende a ser:",
+        alternativas:[
+          "Sempre ok.",
+          "Potencialmente irregular por exposição/captação/sensacionalismo dependendo do contexto.",
+          "Obrigatório.",
+          "Ok se marcar a localização."
+        ],
+        correta:1,
+        comentario:"Prova costuma tratar exposição como zona de risco. Mesmo com consentimento, pode haver exploração e indução."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Médico plantonista deixa plantão sem substituto por motivo pessoal, com pacientes aguardando. Em prova:",
+        alternativas:[
+          "Ok se avisar depois.",
+          "Pode configurar abandono de plantão/assistência.",
+          "Ok se estiver cansado.",
+          "Ok se for sábado."
+        ],
+        correta:1,
+        comentario:"Saída sem passagem e sem cobertura é pegadinha frequente: abandono/irresponsabilidade."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Discussão de caso em corredor/ambulatório com pessoas ao redor ouvindo. Isso é:",
+        alternativas:[
+          "Ok se ninguém comentar.",
+          "Risco de quebra de sigilo; deve-se preservar privacidade.",
+          "Obrigatório para ensino.",
+          "Ok se falar baixo."
+        ],
+        correta:1,
+        comentario:"Sigilo também é ambiente e comportamento — não só documento."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Em paciente terminal, manter analgesia e conforto mesmo com potencial de reduzir nível de consciência é:",
+        alternativas:[
+          "Sempre eutanásia.",
+          "Pode ser eticamente aceitável quando objetivo é aliviar sofrimento, com proporcionalidade e registro.",
+          "Proibido.",
+          "Obrigatório suspender analgesia."
+        ],
+        correta:1,
+        comentario:"Objetivo e proporcionalidade importam. Conforto é prioridade no paliativo."
+      },
+
+      // 36-50
+      {
+        tema:"Prontuário",
+        enunciado:"Qual postura é mais adequada ao registrar suspeita de violência?",
+        alternativas:[
+          "Omitir para não se envolver.",
+          "Registrar achados objetivos, orientar rede de proteção e seguir fluxos legais quando aplicável.",
+          "Acusar alguém nominalmente sem evidência.",
+          "Postar nas redes para denunciar."
+        ],
+        correta:1,
+        comentario:"Prova cobra objetividade, proteção do paciente e uso de canais adequados."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"Paciente pede tratamento experimental sem evidência sólida. Conduta mais alinhada?",
+        alternativas:[
+          "Prescrever para agradar.",
+          "Explicar evidências/risco, oferecer alternativas e evitar conduta temerária.",
+          "Omitir riscos para evitar medo.",
+          "Prometer que funciona para manter adesão."
+        ],
+        correta:1,
+        comentario:"Ética + boa prática: honestidade, evidência e segurança."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Médico usa redes sociais para atacar outro médico por conduta clínica, citando detalhes do caso. Isso é:",
+        alternativas:[
+          "Liberdade de expressão irrestrita.",
+          "Conduta antiética e potencial quebra de sigilo + desrespeito profissional.",
+          "Ok se for para alertar.",
+          "Ok se o outro médico merecer."
+        ],
+        correta:1,
+        comentario:"Prova pune: exposição, sensacionalismo, ataque público e possível sigilo."
+      },
+      {
+        tema:"Publicidade",
+        enunciado:"Médico anuncia “o melhor da cidade”, “número 1”, “o mais premiado”, sem critérios objetivos. Em prova:",
+        alternativas:[
+          "Ok, é só opinião.",
+          "Pode ser considerado autopromoção/sensacionalismo/indução.",
+          "Obrigatório para marketing.",
+          "Permitido se usar emojis."
+        ],
+        correta:1,
+        comentario:"Superlativos e autopromoção são alvo de banca."
+      },
+      {
+        tema:"Urgência/Abandono",
+        enunciado:"Recusar atendimento por falta de pagamento em situação não urgente pode ocorrer?",
+        alternativas:[
+          "Nunca, em nenhuma situação.",
+          "Em geral, urgência não se recusa; fora de urgência, há nuances contratuais, mas deve haver orientação/encaminhamento sem abandono.",
+          "Sempre pode recusar qualquer um.",
+          "Pode recusar e não orientar nada."
+        ],
+        correta:1,
+        comentario:"Prova: urgência = não. Fora de urgência, o ponto é não abandonar e manter conduta responsável."
+      },
+      {
+        tema:"Sigilo",
+        enunciado:"Médico envia resultados por e-mail sem segurança e para endereço errado. Principal problema ético?",
+        alternativas:[
+          "Nenhum; foi sem querer.",
+          "Risco de violação de sigilo e proteção de dados; exige cautela e protocolos.",
+          "É correto se for rápido.",
+          "É correto se o paciente estiver doente."
+        ],
+        correta:1,
+        comentario:"Prova moderna: privacidade e sigilo incluem meios digitais e cuidado com envio."
+      },
+      {
+        tema:"Prontuário",
+        enunciado:"Qual conduta melhor reduz risco ético-legal em alta a pedido?",
+        alternativas:[
+          "Apenas assinatura do paciente.",
+          "Registro de capacidade, orientações, riscos, sinais de alarme, e plano de retorno.",
+          "Não registrar para evitar prova contra si.",
+          "Registrar somente “alta a pedido” e nada mais."
+        ],
+        correta:1,
+        comentario:"Registro completo é proteção e cuidado. Esse é item de prova certeiro."
+      },
+      {
+        tema:"Ortotanásia/Paliativos",
+        enunciado:"Futilidade terapêutica: o que banca costuma esperar?",
+        alternativas:[
+          "Sempre fazer tudo até o fim.",
+          "Avaliar benefício real, evitar intervenções desproporcionais e alinhar objetivos com paciente/família.",
+          "Nunca tratar paciente terminal.",
+          "Suspender todo cuidado."
+        ],
+        correta:1,
+        comentario:"Evitar obstinação terapêutica e manter cuidado centrado no conforto e valores do paciente."
+      },
+      {
+        tema:"Autonomia/Consentimento",
+        enunciado:"O médico pode obrigar tratamento psiquiátrico apenas por discordar do estilo de vida do paciente?",
+        alternativas:[
+          "Sim, se o médico achar melhor.",
+          "Não; intervenção involuntária exige critérios clínicos/legais e risco, não julgamento moral.",
+          "Sim, se a família pedir.",
+          "Sim, se houver redes sociais envolvidas."
+        ],
+        correta:1,
+        comentario:"Prova cobra: autonomia e critérios objetivos. Moral pessoal não manda na conduta."
+      },
+      {
+        tema:"Relação/Pesquisa/Conflitos",
+        enunciado:"Ao orientar o paciente a procurar outro serviço, o que mais “fecha” a questão em prova?",
+        alternativas:[
+          "Nada; só mandar embora.",
+          "Garantir continuidade (encaminhar, orientar sinais de alarme e documentar).",
+          "Criticar o serviço anterior.",
+          "Dizer que não é problema seu."
+        ],
+        correta:1,
+        comentario:"Continuidade + registro. Esse combo aparece em várias áreas (ética, MFC, urgência)."
+      }
+    ];
+
+    // Se por acaso não chegarmos em 50 (por edição), completamos com variações auto:
+    while(questions.length < 50){
+      const n = questions.length + 1;
+      questions.push({
+        tema:"Misto (Revisão)",
+        enunciado:`Questão extra #${n}: Em um dilema ético, qual trio de perguntas mais ajuda a decidir conduta em prova?`,
+        alternativas:[
+          "“É caro?”, “é rápido?”, “dá engajamento?”",
+          "“Paciente é capaz?”, “há urgência?”, “há dever legal/justa causa?”",
+          "“Meu colega concorda?”, “a família quer?”, “vai dar trabalho?”",
+          "“É comum?”, “é raro?”, “é bonito?”"
+        ],
+        correta:1,
+        comentario:"Esse é o algoritmo de prova: capacidade, urgência, dever legal/justa causa. Resolve metade das pegadinhas."
+      });
+    }
+
+    // ====== Renderização do quiz ======
+    const quizEl = document.getElementById("quiz");
+    const hitsEl = document.getElementById("hits");
+    const answeredEl = document.getElementById("answered");
+    const scoreEl = document.getElementById("score");
+    const pfill = document.getElementById("pfill");
+
+    const state = {
+      answers: Array(questions.length).fill(null), // índice marcado
+      locked: Array(questions.length).fill(false), // já conferiu
+      hits: 0,
+      answered: 0,
+    };
+
+    function updateMeter(){
+      hitsEl.textContent = state.hits;
+      answeredEl.textContent = state.answered;
+      scoreEl.textContent = questions.length;
+      const pct = Math.round((state.answered / questions.length) * 100);
+      pfill.style.width = pct + "%";
+    }
+
+    function render(){
+      quizEl.innerHTML = "";
+      questions.forEach((q, i) => {
+        const card = document.createElement("div");
+        card.className = "qcard";
+        card.id = `q${i}`;
+
+        const meta = document.createElement("div");
+        meta.className = "qmeta";
+
+        const left = document.createElement("div");
+        left.innerHTML = `<div class="tag">#${i+1} • ${q.tema}</div>`;
+
+        const right = document.createElement("div");
+        right.innerHTML = `<div class="tag">Dificuldade: média-alta</div>`;
+
+        meta.appendChild(left);
+        meta.appendChild(right);
+
+        const h = document.createElement("p");
+        h.className = "qtitle";
+        h.textContent = q.enunciado;
+
+        const opts = document.createElement("div");
+        opts.className = "opts";
+
+        q.alternativas.forEach((opt, idx) => {
+          const lab = document.createElement("label");
+          lab.className = "opt";
+          const checked = state.answers[i] === idx ? "checked" : "";
+          const disabled = state.locked[i] ? "disabled" : "";
+          lab.innerHTML = `
+            <input type="radio" name="q_${i}" value="${idx}" ${checked} ${disabled}/>
+            <div class="olabel">${String.fromCharCode(65+idx)}) ${opt}</div>
+          `;
+          lab.addEventListener("click", (e) => {
+            if(state.locked[i]) return;
+            const input = lab.querySelector("input");
+            input.checked = true;
+            state.answers[i] = idx;
+          });
+          opts.appendChild(lab);
         });
 
-        // ========= BASE DE 50 QUESTÕES ÉTICA (com comentários) ==========
-        const questoes = [
-            // serão geradas 50 – padrão médio/alto, comentário após resposta.
-        ];
+        const actions = document.createElement("div");
+        actions.className = "actions";
 
-        // Gerador rápido de 50 questões com temas variados dentro do código de ética
-        function gerarBancoQuestoes() {
-            const base = [
-                { pergunta: "De acordo com o Código de Ética, constitui dever do servidor público:", alt: ["deixar de atender o público se estiver em horário de almoço", "representar contra ilegalidades ou omissões", "exigir reconhecimento de firma para qualquer pedido", "ter preferência em licitações"], correta: 1, comentario: "Representar contra ilegalidades/omissões é dever expresso (art. 116, IX, Lei 8.112/90 e similares em códigos estaduais). As demais violam princípios." },
-                { pergunta: "É vedado ao agente público, segundo o Código de Ética profissional:", alt: ["participar de sindicância", "reter autos de processo fora do prazo", "atuar como defensor de direitos humanos", "frequentar curso de pós-graduação"], correta: 1, comentario: "Reter autos fora do prazo configura ato omissivo que atrasa o serviço; é vedação típica." },
-                { pergunta: "A comissão de ética, ao tomar conhecimento de fato potencialmente irregular:", alt: ["deve arquivar se for anônimo", "instaura procedimento apuratório de ofício", "aguarda provocação do superior", "não pode atuar sem representação escrita"], correta: 1, comentario: "Pode e deve instaurar de ofício o procedimento para apuração; anonimato não impede apuração preliminar." },
-                { pergunta: "No âmbito do Código de Ética, a censura ética é aplicada quando:", alt: ["o agente pratica crime doloso", "ocorre infração leve de natureza disciplinar", "a infração é de pequena potencialidade ofensiva e há reincidência?", "o ato é praticado com dolo ou má-fé e gera dano à imagem do órgão"], correta: 3, comentario: "A censura ética é mais gravosa que a advertência; usualmente aplicada em casos de dolo, má-fé ou reincidência que afetem a imagem institucional." },
-                { pergunta: "O princípio da moralidade administrativa, amplamente cobrado em ética, exige:", alt: ["apenas cumprir a lei", "honestidade, lealdade e boa-fé", "que o ato seja publicado em diário oficial", "prévia licitação"], correta: 1, comentario: "Moralidade vai além da legalidade; exige probidade, honestidade, lealdade e boa-fé." },
-                { pergunta: "Quanto ao conflito de interesses, é impedido ao servidor:", alt: ["participar de organização sindical", "prestar serviços a empresa privada que tenha vínculo com seu órgão", "trabalhar como voluntário em ONG", "dar entrevista sobre sua área"], correta: 1, comentario: "Vedação expressa: não pode prestar serviço a empresa privada que seja fiscalizada ou contratada do órgão em que atua." },
-                { pergunta: "Servidor público que utiliza material de escritório para fins particulares:", alt: ["não comete infração ética, pois é bem de consumo", "comete infração ética por ato contra o patrimônio", "apenas falta administrativa, não ética", "depende do valor"], correta: 1, comentario: "Utilização de bens públicos para interesse particular configura infração ética (vedação genérica) e improbidade." },
-                { pergunta: "Assinale a alternativa que corresponde a uma sanção prevista em código de ética (federal):", alt: ["prisão simples", "advertência por falta de exação", "demissão do cargo", "suspensão de 30 dias"], correta: 1, comentario: "Advertência por falta de exação (zelo) é típica sanção ética; demissão e suspensão são penas disciplinares." },
-                { pergunta: "A autoridade que tomar conhecimento de infração ética tem o dever de:", alt: ["representar à Comissão de Ética", "instaurar sindicância patrimonial", "encaminhar ao Ministério Público", "aplicar diretamente a censura"], correta: 0, comentario: "Deve representar à Comissão de Ética, que tem competência para apurar." },
-                { pergunta: "O Código de Ética veda ao servidor ausentar-se do serviço:", alt: ["para tratar de interesses particulares, sem justificativa", "com licença médica", "para doação de sangue", "por convocação judicial"], correta: 0, comentario: "A vedação é clara: 'ausentar-se do serviço durante o expediente, sem prévia autorização do chefe imediato' por motivo particular." }
-            ];
-            // expandir para 50 com pequenas variações e novos cenários
-            const expandido = [];
-            for (let i = 0; i < 50; i++) {
-                // cicla no array base e incrementa especificidade
-                let q = JSON.parse(JSON.stringify(base[i % base.length])); // clona
-                // ajusta textos levemente para parecer nova questão
-                if (i % 3 === 0) {
-                    q.pergunta = q.pergunta.replace("Código de Ética", "Código de Ética profissional");
-                } else if (i % 3 === 1) {
-                    q.pergunta = "[Alta incidência] " + q.pergunta;
-                }
-                // insere algumas novas alternativas / comentarios adaptados
-                if (i % 5 === 2) {
-                    q.comentario += " (padrão CESPE/CEBRASPE)";
-                }
-                expandido.push({
-                    id: i+1,
-                    pergunta: q.pergunta,
-                    alternativas: [...q.alt],
-                    correta: q.correta,
-                    comentario: q.comentario
-                });
-            }
-            // troca alguns para evitar repetição excessiva (customização manual sutil)
-            expandido[12].pergunta = "No tocante às comissões de ética, é correto afirmar:"; 
-            expandido[12].alternativas = ["são vinculadas ao controle interno", "têm composição paritária", "possuem membros estáveis por 2 anos, permitida uma recondução", "decidem por maioria simples e têm caráter consultivo"]; 
-            expandido[12].correta = 2; 
-            expandido[12].comentario = "Membros cumprem mandato de 2 anos, permitida uma recondução, conforme Decreto 6.029/2007.";
+        const btn = document.createElement("button");
+        btn.className = "primary";
+        btn.textContent = state.locked[i] ? "Respondida" : "Conferir resposta";
+        btn.disabled = state.locked[i];
+        btn.addEventListener("click", () => checkOne(i));
 
-            expandido[25].pergunta = "Servidor que revela fato de que teve ciência em razão do cargo e que deveria permanecer em segredo, fora das hipóteses legais, comete infração ética:";
-            expandido[25].alternativas = ["apenas se houver dano", "independente de dano", "só se for informação sigilosa por lei", "se houver vantagem econômica"]; 
-            expandido[25].correta = 1; 
-            expandido[25].comentario = "A simples revelação indevida, ainda que sem dano, configura infração ética (dever de sigilo).";
+        const tip = document.createElement("div");
+        tip.className = "small";
+        tip.innerHTML = `Dica: pense em <b>capaz?</b> <b>urgente?</b> <b>dever legal?</b>`;
 
-            expandido[37].pergunta = "O acúmulo de cargos públicos, quando permitido por lei, exige compatibilidade de horários. Sob a ótica ética, tal acúmulo:"; 
-            expandido[37].alternativas = ["é sempre antiético", "deve ser comunicado à comissão de ética", "é vedado se houver conflito de interesses", "depende de autorização do superior"]; 
-            expandido[37].correta = 2; 
-            expandido[37].comentario = "Ainda que lícito, o acúmulo deve observar inexistência de conflito de interesses, sob pena de infração ética.";
+        actions.appendChild(btn);
+        actions.appendChild(tip);
 
-            // retorna 50 objetos
-            return expandido.slice(0,50);
+        const fb = document.createElement("div");
+        fb.className = "feedback";
+        fb.id = `fb_${i}`;
+
+        card.appendChild(meta);
+        card.appendChild(h);
+        card.appendChild(opts);
+        card.appendChild(actions);
+        card.appendChild(fb);
+
+        quizEl.appendChild(card);
+      });
+
+      updateMeter();
+    }
+
+    function checkOne(i){
+      const chosen = state.answers[i];
+      const fb = document.getElementById(`fb_${i}`);
+      if(chosen === null || chosen === undefined){
+        fb.className = "feedback bad";
+        fb.innerHTML = `<b>Escolhe uma alternativa antes.</b> (Sem chute aqui 😄)`;
+        return;
+      }
+      if(state.locked[i]) return;
+
+      state.locked[i] = true;
+      state.answered += 1;
+
+      const q = questions[i];
+      const correct = q.correta;
+
+      if(chosen === correct){
+        state.hits += 1;
+        fb.className = "feedback good";
+        fb.innerHTML = `<b>✅ Correta.</b> ${q.comentario}`;
+      }else{
+        fb.className = "feedback bad";
+        fb.innerHTML = `<b>❌ Incorreta.</b> Correta: <b>${String.fromCharCode(65+correct)})</b> ${q.alternativas[correct]}<br/><br/><b>Comentário:</b> ${q.comentario}`;
+      }
+
+      // Desabilitar radios
+      document.querySelectorAll(`input[name="q_${i}"]`).forEach(r => r.disabled = true);
+
+      // Atualiza botão
+      const card = document.getElementById(`q${i}`);
+      const btn = card.querySelector("button.primary");
+      btn.textContent = "Respondida";
+      btn.disabled = true;
+
+      updateMeter();
+    }
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      state.answers = Array(questions.length).fill(null);
+      state.locked = Array(questions.length).fill(false);
+      state.hits = 0;
+      state.answered = 0;
+      render();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    document.getElementById("btnCheckAll").addEventListener("click", () => {
+      const total = questions.length;
+      const pct = total ? Math.round((state.hits/total)*100) : 0;
+
+      // análise por tema
+      const byTema = {};
+      questions.forEach((q, i) => {
+        if(!byTema[q.tema]) byTema[q.tema] = {total:0, hit:0, ans:0};
+        byTema[q.tema].total++;
+        if(state.locked[i]){
+          byTema[q.tema].ans++;
+          if(state.answers[i] === q.correta) byTema[q.tema].hit++;
         }
+      });
 
-        const banco = gerarBancoQuestoes();
+      let lines = Object.entries(byTema)
+        .sort((a,b)=> b[1].total - a[1].total)
+        .map(([t, v]) => {
+          const p = v.ans ? Math.round((v.hit/v.ans)*100) : 0;
+          return `• <b>${t}</b>: ${v.hit}/${v.ans} (acerto ${p}%)`;
+        }).join("<br/>");
 
-        // Renderizar todas as questões no div
-        const containerQuestoes = document.getElementById('lista-questoes');
-        function renderQuestoes() {
-            let html = '';
-            banco.forEach((q, idx) => {
-                html += `<div class="questao-card" id="q-${idx}">`;
-                html += `<span class="questao-num"><i class="fas fa-pen"></i> QUESTÃO ${idx+1}/50</span>`;
-                html += `<div class="questao-texto">${q.pergunta}</div>`;
-                html += `<div class="alternativas" id="alt-group-${idx}">`;
-                // alternativas com radio
-                q.alternativas.forEach((alt, i) => {
-                    html += `<label class="alternativa">`;
-                    html += `<input type="radio" name="q${idx}" value="${i}" style="margin-right: 10px;"> ${alt}`;
-                    html += `</label>`;
-                });
-                html += `</div>`;
-                html += `<div style="display: flex; align-items: center;">`;
-                html += `<button class="btn-resposta" data-qidx="${idx}"><i class="fas fa-comment-dots"></i> ver resp. comentada</button>`;
-                html += `</div>`;
-                html += `<div id="comentario-${idx}" class="comentario">`;
-                html += `<strong>Resposta:</strong> ${String.fromCharCode(65 + q.correta)} · ${q.alternativas[q.correta]}<br>`;
-                html += `<strong><i class="fas fa-info-circle"></i> comentário:</strong> ${q.comentario}`;
-                html += `</div>`;
-                html += `</div>`;
-            });
-            containerQuestoes.innerHTML = html;
+      const msg = `
+        <div style="margin-top:10px; padding:12px; border-radius:16px; border:1px solid rgba(37,99,235,.25); background: rgba(37,99,235,.06);">
+          <b>Resumo do desempenho</b><br/>
+          Respondidas: <b>${state.answered}/${total}</b><br/>
+          Acertos: <b>${state.hits}</b> • Aproveitamento geral: <b>${pct}%</b><br/><br/>
+          <b>Por tema (apenas as respondidas):</b><br/>
+          ${lines}
+          <div style="margin-top:10px" class="small">
+            Dica turbo: foque primeiro no tema com <b>maior peso</b> e <b>menor acerto</b>. Aí seu ganho de nota é exponencial.
+          </div>
+        </div>
+      `;
 
-            // Adicionar eventos para cada botão de resposta comentada
-            document.querySelectorAll('.btn-resposta').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const qidx = this.dataset.qidx;
-                    const comentarioDiv = document.getElementById(`comentario-${qidx}`);
-                    // toggle para mostrar/esconder
-                    comentarioDiv.classList.toggle('mostrar');
-                    // se quiser fechar os outros, opcional
-                });
-            });
-        }
+      // Cria/atualiza caixa
+      let box = document.getElementById("resultBox");
+      if(!box){
+        box = document.createElement("div");
+        box.id = "resultBox";
+        document.getElementById("quizCard").insertBefore(box, document.getElementById("quiz"));
+      }
+      box.innerHTML = msg;
 
-        renderQuestoes();
-    </script>
+      box.scrollIntoView({behavior:"smooth", block:"start"});
+    });
 
-    <!-- pequena correção para os radio names não conflitarem (já está dinâmico) -->
-    <!-- ajuste de ícone contato e layout final -->
+    render();
+  </script>
 </body>
 </html>
